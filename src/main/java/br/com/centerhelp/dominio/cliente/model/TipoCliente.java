@@ -15,4 +15,37 @@ public class TipoCliente {
     @Column(name = "NM_TP_CLIENTE")
     private String nome;
 
+    public TipoCliente() {
+    }
+
+    public TipoCliente(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public TipoCliente setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public TipoCliente setNome(String nome) {
+        this.nome = nome;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoCliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
 }

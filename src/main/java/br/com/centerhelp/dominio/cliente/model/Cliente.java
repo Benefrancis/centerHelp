@@ -36,6 +36,71 @@ public class Cliente {
     )
     private TipoCliente tipo;
 
+    public Cliente() {
+    }
+
+    public Cliente(Long id, String nome, String email, LocalDate nascimento, Telefone telefone, TipoCliente tipo) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.nascimento = nascimento;
+        this.telefone = telefone;
+        this.tipo = tipo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Cliente setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Cliente setNome(String nome) {
+        this.nome = nome;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Cliente setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public LocalDate getNascimento() {
+        return nascimento;
+    }
+
+    public Cliente setNascimento(LocalDate nascimento) {
+        this.nascimento = nascimento;
+        return this;
+    }
+
+    public Telefone getTelefone() {
+        return telefone;
+    }
+
+    public Cliente setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+        return this;
+    }
+
+    public TipoCliente getTipo() {
+        return tipo;
+    }
+
+    public Cliente setTipo(TipoCliente tipo) {
+        this.tipo = tipo;
+        return this;
+    }
 
     @Override
     public String toString() {
