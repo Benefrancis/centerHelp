@@ -18,7 +18,7 @@ public class TipoEquipamentoRepository extends Repository {
 
     public static TipoEquipamento save(TipoEquipamento tp) {
         manager.getTransaction().begin();
-        manager.merge(tp);
+        manager.persist(tp);
         manager.getTransaction().commit();
         return tp;
     }

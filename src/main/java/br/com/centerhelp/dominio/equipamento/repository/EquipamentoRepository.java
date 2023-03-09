@@ -21,8 +21,13 @@ public class EquipamentoRepository extends Repository {
 
         var tp = e.getTipo();
 
-        if (e != null) {
-            tp = manager.find(TipoEquipamento.class, e.getTipo().getId());
+        if (tp != null) {
+
+            if (tp.getId() != null) {
+                tp = manager.find(TipoEquipamento.class, tp.getId());
+            } else {
+                tp = TipoEquipamentoRepository.save(tp);
+            }
             e.setTipo(tp);
         }
 

@@ -6,7 +6,7 @@ import jakarta.persistence.Persistence;
 
 public abstract class Repository {
 
-    public static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("oracle-fiap");
+    public static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("oracle");
 
     public static final EntityManager manager = factory.createEntityManager();
 

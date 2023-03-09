@@ -4,7 +4,7 @@ package br.com.centerhelp.dominio.equipamento.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TB_TP_EQUIPAMENTO")
+@Table(name = "TB_TP_EQUIPAMENTO", uniqueConstraints = @UniqueConstraint(name = "UK_NM_TP_EQUIPAMENTO", columnNames = "NM_TP_EQUIPAMENTO") )
 public class TipoEquipamento {
 
     @Id
