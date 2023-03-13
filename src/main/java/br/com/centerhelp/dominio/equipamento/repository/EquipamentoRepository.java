@@ -32,7 +32,7 @@ public class EquipamentoRepository extends Repository {
         }
 
         manager.getTransaction().begin();
-        manager.merge(e);
+        manager.persist(e);
         manager.getTransaction().commit();
         return e;
     }

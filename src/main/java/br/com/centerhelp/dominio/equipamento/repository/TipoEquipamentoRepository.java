@@ -3,6 +3,7 @@ package br.com.centerhelp.dominio.equipamento.repository;
 import br.com.centerhelp.abstracoes.Repository;
 import br.com.centerhelp.dominio.equipamento.model.TipoEquipamento;
 
+import javax.swing.*;
 import java.util.Collection;
 
 public class TipoEquipamentoRepository extends Repository {
@@ -17,11 +18,19 @@ public class TipoEquipamentoRepository extends Repository {
     }
 
     public static TipoEquipamento save(TipoEquipamento tp) {
-        manager.getTransaction().begin();
-        manager.persist(tp);
-        manager.getTransaction().commit();
-        return tp;
-    }
 
+        manager.getTransaction().begin();
+
+        try {
+            manager.persist(tp);
+            manager.getTransaction().commit();
+            return tp;
+        } catch (Exception e) {
+            manager.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Já existe um Tipo de Equipamento com o nome " + tp.getNome());
+            return null;
+        }
+
+    }
 
 }
