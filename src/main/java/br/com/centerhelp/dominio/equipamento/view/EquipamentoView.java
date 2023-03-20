@@ -14,7 +14,9 @@ public abstract class EquipamentoView {
         String numeroDeSerie = JOptionPane.showInputDialog("Número de Série do " + tipo.getNome(), e == null ? "" : e.getNumeroDeSerie());
         var equipamento = new Equipamento();
         equipamento.setNome(nome).setNumeroDeSerie(numeroDeSerie).setTipo(tipo).setId(e == null ? null : e.getId());
+
         return equipamento;
+
     }
 
 }

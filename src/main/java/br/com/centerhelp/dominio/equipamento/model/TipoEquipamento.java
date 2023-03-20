@@ -1,14 +1,14 @@
 package br.com.centerhelp.dominio.equipamento.model;
 
-
 import jakarta.persistence.*;
+import lombok.Data;
+
 
 @Entity
 @Table(name = "TB_TP_EQUIPAMENTO",
         uniqueConstraints = @UniqueConstraint(name = "UK_NM_TP_EQUIPAMENTO", columnNames = "NM_TP_EQUIPAMENTO")
 )
 public class TipoEquipamento {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_TP_EQUIPAMENTO")
     @SequenceGenerator(name = "SQ_TP_EQUIPAMENTO", sequenceName = "SQ_TP_EQUIPAMENTO", initialValue = 1, allocationSize = 20)
@@ -18,12 +18,12 @@ public class TipoEquipamento {
     @Column(name = "NM_TP_EQUIPAMENTO")
     private String nome;
 
-    public TipoEquipamento() {
-    }
-
     public TipoEquipamento(Long id, String nome) {
         this.id = id;
         this.nome = nome;
+    }
+
+    public TipoEquipamento() {
     }
 
     public Long getId() {
