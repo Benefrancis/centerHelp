@@ -40,12 +40,14 @@ public class TipoEquipamentoResource {
         var resp = TipoEquipamentoRepository.save(tipo);
 
         if(resp!=null) {
+
             final URI tipoUri = UriBuilder
                     .fromResource(TipoEquipamentoResource.class)
                     .path("/tipo-equipamento/{id}")
                     .build(resp.getId());
 
             return Response.created(tipoUri).entity(resp).build();
+
         }else{
             return Response.status(400).entity("Já existe").build();
         }
