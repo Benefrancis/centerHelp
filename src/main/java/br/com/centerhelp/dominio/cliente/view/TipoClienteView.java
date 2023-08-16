@@ -7,6 +7,9 @@ import javax.swing.*;
 
 public abstract class TipoClienteView {
 
+    static TipoClienteRepository repo = new TipoClienteRepository();
+
+
     public static TipoCliente showForm(TipoCliente t) {
         var nome = JOptionPane.showInputDialog("Tipo de Cliente", t == null ? "" : t.getNome());
         TipoCliente tipo = new TipoCliente();
@@ -16,7 +19,8 @@ public abstract class TipoClienteView {
 
     public static TipoCliente select(TipoCliente t) {
 
-        var tipos = TipoClienteRepository.findAll();
+
+        var tipos = repo.findAll();
 
         if (tipos.isEmpty()) return showForm(null);
 

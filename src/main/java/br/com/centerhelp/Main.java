@@ -11,7 +11,8 @@ public class Main {
 
     private static void novoEquipamento() {
         Equipamento e = EquipamentoView.showForm(null);
-        EquipamentoRepository.save(e);
+        EquipamentoRepository repo = new EquipamentoRepository();
+        repo.persist(e);
         System.out.println("Equipamento salvo com sucesso! " + e);
         EquipamentoRepository.manager.close();
         EquipamentoRepository.factory.close();

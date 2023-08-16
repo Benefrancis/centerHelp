@@ -4,11 +4,24 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public abstract class Repository {
+import java.util.Collection;
 
-    public static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("oracle");
+public interface Repository<T, U> {
+
+    public static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("maria-db");
 
     public static final EntityManager manager = factory.createEntityManager();
 
+    Collection<T> findAll();
+
+    T findById(U id);
+
+    Collection<T> findByName(String text);
+
+    T persist(T entity);
+
+    T update(T entity);
+
+    void delete(T entity);
 
 }
