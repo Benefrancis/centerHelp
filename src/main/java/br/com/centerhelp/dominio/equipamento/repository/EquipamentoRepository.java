@@ -44,7 +44,7 @@ public class EquipamentoRepository implements Repository<Equipamento, Long> {
         }
 
         manager.getTransaction().begin();
-        manager.merge(e);
+        manager.persist(e);
         manager.getTransaction().commit();
         return e;
     }

@@ -7,7 +7,6 @@ import javax.swing.*;
 
 public class TipoEquipamentoView {
 
-
     static TipoEquipamentoRepository repository;
 
     public static TipoEquipamento showForm(TipoEquipamento tp) {
@@ -35,6 +34,5 @@ public class TipoEquipamentoView {
                 tipo == null ? 1 : tipo);
         return ret;
     }
-
 
 }

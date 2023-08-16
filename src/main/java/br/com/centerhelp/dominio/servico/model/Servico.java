@@ -37,8 +37,6 @@ public class Servico {
     )
     private TipoServico tipo;
 
-
-
     public Servico() {
     }
 

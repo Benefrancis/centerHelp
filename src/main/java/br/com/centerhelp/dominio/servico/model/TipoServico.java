@@ -4,7 +4,14 @@ package br.com.centerhelp.dominio.servico.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TB_TP_SERVICO")
+@Table(name = "TB_TP_SERVICO",
+uniqueConstraints = {
+        @UniqueConstraint(
+                name = "UK_NOME_TIPO_SERVICO",
+                columnNames = "NM_TP_SERVICO"
+        )
+  }
+)
 public class TipoServico {
 
     @Id
@@ -45,9 +52,6 @@ public class TipoServico {
 
     @Override
     public String toString() {
-        return "TipoServico{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                '}';
+        return nome.toUpperCase();
     }
 }
