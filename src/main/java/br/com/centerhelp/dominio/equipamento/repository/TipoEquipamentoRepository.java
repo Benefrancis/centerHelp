@@ -2,11 +2,21 @@ package br.com.centerhelp.dominio.equipamento.repository;
 
 import br.com.centerhelp.abstracoes.Repository;
 import br.com.centerhelp.dominio.equipamento.model.TipoEquipamento;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Collection;
 
 public class TipoEquipamentoRepository implements Repository<TipoEquipamento, Long> {
+
+    private EntityManager manager;
+
+    public TipoEquipamentoRepository() {
+        super();
+        this.manager = getManager();
+    }
+
 
     public Collection<TipoEquipamento> findAll() {
         String jpql = "From TipoEquipamento t";
@@ -21,17 +31,24 @@ public class TipoEquipamentoRepository implements Repository<TipoEquipamento, Lo
     public Collection<TipoEquipamento> findByName(String text) {
         String jpql = "SELECT t FROM TipoEquipamento t WHERE  LOWER(t.nome) = LOWER(:nome)";
 
-        return manager
+        return getManager()
                 .createQuery(jpql, TipoEquipamento.class)
                 .setParameter("nome", text)
                 .getResultList();
     }
 
     public TipoEquipamento persist(TipoEquipamento tp) {
-        manager.getTransaction().begin();
-        manager.persist(tp);
-        manager.getTransaction().commit();
-        return tp;
+        try {
+            manager.getTransaction().begin();
+            manager.persist(tp);
+            manager.getTransaction().commit();
+            return tp;
+        } catch (Exception e) {
+            // e.printStackTrace();
+            manager.getTransaction().rollback();
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override

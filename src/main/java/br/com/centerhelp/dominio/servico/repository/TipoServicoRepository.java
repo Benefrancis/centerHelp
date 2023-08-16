@@ -4,6 +4,7 @@ import br.com.centerhelp.abstracoes.Repository;
 import br.com.centerhelp.dominio.equipamento.model.Equipamento;
 import br.com.centerhelp.dominio.equipamento.model.TipoEquipamento;
 import br.com.centerhelp.dominio.servico.model.TipoServico;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 
 import javax.swing.*;
@@ -11,6 +12,13 @@ import java.util.Collection;
 import java.util.List;
 
 public class TipoServicoRepository implements Repository<TipoServico, Long> {
+
+    private EntityManager manager;
+
+    public TipoServicoRepository() {
+        super();
+        this.manager = getManager();
+    }
 
     public List<TipoServico> findAll() {
         return manager.createQuery("From TipoServico").getResultList();

@@ -1,9 +1,9 @@
 package br.com.centerhelp.dominio.servico.repository;
 
 import br.com.centerhelp.abstracoes.Repository;
-import br.com.centerhelp.dominio.equipamento.model.Equipamento;
 import br.com.centerhelp.dominio.servico.model.Servico;
 import br.com.centerhelp.dominio.servico.model.TipoServico;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.Collection;
@@ -12,6 +12,13 @@ import java.util.Objects;
 
 public class ServicoRepository implements Repository<Servico, Long> {
     static TipoServicoRepository tipoServicoRepository = new TipoServicoRepository();
+
+    private EntityManager manager;
+
+    public ServicoRepository() {
+        super();
+        this.manager = getManager();
+    }
 
     public List<Servico> findAll() {
         return manager.createQuery("From Servico").getResultList();
@@ -42,10 +49,20 @@ public class ServicoRepository implements Repository<Servico, Long> {
             }
             servico.setTipo(tipo);
         }
-        manager.getTransaction().begin();
-        manager.persist(servico);
-        manager.getTransaction().commit();
-        return servico;
+
+
+        try {
+            manager.getTransaction().begin();
+            manager.persist(servico);
+            manager.getTransaction().commit();
+            return servico;
+        } catch (Exception ex) {
+            // e.printStackTrace();
+            manager.getTransaction().rollback();
+            System.err.println(ex.getMessage());
+            return null;
+        }
+
     }
 
     @Override

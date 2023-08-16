@@ -2,6 +2,7 @@ package br.com.centerhelp.dominio.cliente.repository;
 
 import br.com.centerhelp.abstracoes.Repository;
 import br.com.centerhelp.dominio.cliente.model.Cliente;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.Collection;
@@ -9,6 +10,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class ClienteRepository implements Repository<Cliente, Long> {
+
+    private EntityManager manager;
+
+    public ClienteRepository() {
+        super();
+        this.manager = getManager();
+    }
 
 
     static TipoClienteRepository tipoClienteRepository = new TipoClienteRepository();
@@ -38,11 +46,20 @@ public class ClienteRepository implements Repository<Cliente, Long> {
         if (tipo != null) {
             tipo = tipoClienteRepository.findById(tipo.getId());
         }
-        manager.getTransaction().begin();
-        c.setTipo(tipo);
-        manager.persist(c);
-        manager.getTransaction().commit();
-        return c;
+
+        try {
+            manager.getTransaction().begin();
+            c.setTipo(tipo);
+            manager.persist(c);
+            manager.getTransaction().commit();
+            return c;
+        } catch (Exception e) {
+            manager.getTransaction().rollback();
+            System.err.println(e.getMessage());
+            return null;
+        }
+
+
     }
 
     @Override

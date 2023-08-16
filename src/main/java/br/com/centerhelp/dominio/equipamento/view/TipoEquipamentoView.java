@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class TipoEquipamentoView {
 
-    static TipoEquipamentoRepository repository;
+    static TipoEquipamentoRepository repository = new TipoEquipamentoRepository();
 
     public static TipoEquipamento showForm(TipoEquipamento tp) {
         String nome = JOptionPane.showInputDialog("Tipo de Equipamento", tp == null ? "" : tp.getNome());

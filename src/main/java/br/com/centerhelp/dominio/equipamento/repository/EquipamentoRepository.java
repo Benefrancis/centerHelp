@@ -3,12 +3,21 @@ package br.com.centerhelp.dominio.equipamento.repository;
 import br.com.centerhelp.abstracoes.Repository;
 import br.com.centerhelp.dominio.equipamento.model.Equipamento;
 import br.com.centerhelp.dominio.equipamento.model.TipoEquipamento;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.Collection;
 import java.util.Objects;
 
 public class EquipamentoRepository implements Repository<Equipamento, Long> {
+
+
+    private EntityManager manager;
+
+    public EquipamentoRepository() {
+        super();
+        this.manager = getManager();
+    }
 
     public Collection<Equipamento> findAll() {
         String jpql = "From  Equipamento e";
@@ -43,10 +52,18 @@ public class EquipamentoRepository implements Repository<Equipamento, Long> {
             e.setTipo(tp);
         }
 
-        manager.getTransaction().begin();
-        manager.persist(e);
-        manager.getTransaction().commit();
-        return e;
+        try {
+            manager.getTransaction().begin();
+            manager.persist(e);
+            manager.getTransaction().commit();
+            return e;
+        } catch (Exception ex) {
+            // e.printStackTrace();
+            manager.getTransaction().rollback();
+            System.err.println(ex.getMessage());
+            return null;
+        }
+
     }
 
     @Override

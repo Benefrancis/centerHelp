@@ -5,12 +5,15 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public interface Repository<T, U> {
 
-    public static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("maria-db");
+    static EntityManagerFactory factory = Persistence.createEntityManagerFactory("maria-db");
 
-    public static final EntityManager manager = factory.createEntityManager();
+    default EntityManager getManager() {
+        return factory.createEntityManager();
+    }
 
     Collection<T> findAll();
 

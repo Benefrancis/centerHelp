@@ -61,7 +61,5 @@ public class Main {
         EquipamentoRepository repo = new EquipamentoRepository();
         repo.persist(e);
         System.out.println("Equipamento salvo com sucesso! " + e);
-        EquipamentoRepository.manager.close();
-        EquipamentoRepository.factory.close();
     }
 }
