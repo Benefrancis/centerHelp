@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public interface Repository<T, U> {
 
-    static EntityManagerFactory factory = Persistence.createEntityManagerFactory("maria-db");
+   final static EntityManagerFactory factory = Persistence.createEntityManagerFactory("maria-db");
 
     default EntityManager getManager() {
         return factory.createEntityManager();
