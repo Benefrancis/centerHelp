@@ -46,9 +46,9 @@ public class Main {
     }
 
     private static void novoTipoDeEquipamento() {
+        TipoEquipamentoRepository repo = new TipoEquipamentoRepository();
         var tipo = TipoEquipamentoView.showForm(null);
-        tipo = TipoEquipamentoRepository.save(tipo);
-
+        tipo = repo.persist(tipo);
         if (tipo != null) {
             JOptionPane.showMessageDialog(null, "Tipo de Equipamento (" + tipo.getNome() + ") foi salvo com sucesso! ");
             System.out.println(tipo);
