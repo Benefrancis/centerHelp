@@ -7,6 +7,8 @@ import javax.swing.*;
 
 public abstract class TipoServicoView {
 
+    static TipoServicoRepository repo = new TipoServicoRepository();
+
     public static TipoServico showForm(TipoServico tipo) {
 
         var tp = new TipoServico();
@@ -21,7 +23,7 @@ public abstract class TipoServicoView {
 
 
     public static TipoServico select(TipoServico tp) {
-        var tipos = TipoServicoRepository.findAll();
+        var tipos = repo.findAll();
 
         if (tipos.isEmpty()) return showForm(null);
 
